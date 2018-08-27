@@ -62,11 +62,6 @@ LAST_COMMIT=`git log -1 --format="%at" | xargs -I{} date +%s -d @{}`
 LAST_RELEASE=`curl -s https://api.github.com/repos/$OWNER/$REPO/releases/latest | jq -r ".created_at"`
 LAST_RELEASE=`date +%s --date="$LAST_RELEASE"`
 
-if [[ $LAST_COMMIT == $LAST_RELEASE ]]; then
-    echo "No Release Needed"
-    exit 0
-fi
-
 rm -rf bin build
 ./compile.sh clean
 
